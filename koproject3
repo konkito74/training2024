@@ -1,0 +1,37 @@
+ Add a 6 GB disk to your system.
+1-Create a logical volume with the name “Lo” by using 50PE’s from the volume group “Vo”. Consider the PE size as “6MB”. Mount it on /data with XFS file system.
+
+2-Create a new logical volume with the name “Database” by using 500MB from the volume group “Datastore”. Mount it on /vfatdatabse with vfat filesystem.
+
+3-Extend the swap space by 500MB using partition.
+
+4-Resize “Lo” logical volume so that it becomes 600MB. Any size in between 570MB to 630MB is fine.
+
+5- deploy the server to your home network. Name Server: 8.8.8.8 and 8.8.4.4. hostname: linuxserver.example.com.
+
+6-Configure chronyd service and sync server to the following NTP Server us.server.ntp.org
+
+7-Enable selinux
+
+8-  Create a cronjob for user konkita that run at 2:30pm every day to echo “break time”. 
+You will have the output in /tmp/break.txt
+
+9-  Create a script that to find a string “error” from /var/log/messages and redirect to /tmp/find file.
+ Add another script that will find file larger than 10KB in /var/log/secure and redirect to /tmp/findfile.txt
+ Create a cronjob that those scripts at 11:30PM and verify
+
+
+10- Create a compressed archive file in /tmp using bizp2 and gzip of /var/log/messages. Then compare those 2 compressed files. 
+
+11-  Set your server to the recommended tuned profile 
+
+12-As user konkito, create a web container name myweb
+  in detached mode using rhel8/httpd-24 image with the tag 1-140 from redhat registry. Set the following:
+*Map the web container directory /var/www to host directory ~/mywebsite;
+*Map container port 8080 to host port 8010. Make sure it is not used;
+*set environment variable called SECRET to value “secret123”;
+*configure rootless container as service for user konkito so that myweb container starts automatically.
+NB: passwd konkito: linux1; image registry.redhat.io/rhel8/httpd-24:1-140
+
+13-set up journald persistent
+
